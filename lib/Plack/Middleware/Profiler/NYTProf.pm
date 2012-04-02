@@ -19,8 +19,10 @@ sub call {
     $self->report($env);
     $self->end($env);
 
-    warn "FIXME reset profile for each page since we are running CGI";
-    DB::finish_profile();
+    if ( $ENV{PROFILE_PER_PAGE} ) {
+	    warn "FIXME reset profile for each page since we are running CGI";
+	    DB::finish_profile();
+    }
 
     $res;
 }
